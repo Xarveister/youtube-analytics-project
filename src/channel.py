@@ -7,6 +7,7 @@ from googleapiclient.discovery import build
 class Channel:
     """Класс для ютуб-канала"""
     dict = {}
+
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.__channel_id = channel_id
@@ -18,6 +19,54 @@ class Channel:
         self.subscriberCount = channel['items'][0]['statistics']['subscriberCount']
         self.video_count = channel['items'][0]['statistics']['videoCount']
         self.viewCount = channel['items'][0]['statistics']['viewCount']
+
+    def __str__(self):
+        '''
+        Возвращает название канала и ссылку
+        '''
+        return f'{self.title} ({self.url})'
+
+    def __add__(self, other):
+        '''
+        Складывает подписчиков двух каналов
+        '''
+        return self.subscriber_count + other.subscriber_count
+
+    def __sub__(self, other):
+        '''
+        Вычитаем подписчиков двух каналов
+        '''
+        return self.subscriber_count - other.subscriber_count
+
+    def __lt__(self, other):
+        '''
+        Сравнивает подписчиков двух каналов
+        '''
+        return self.subscriber_count < other.subscriber_count
+
+    def __le__(self, other):
+        '''
+        Сравнивает подписчиков двух каналов
+        '''
+        return self.subscriber_count <= other.subscriber_count
+
+    def __gt__(self, other):
+        '''
+        Сравнивает подписчиков двух каналов
+        '''
+        return self.subscriber_count > other.subscriber_count
+
+    def __ge__(self, other):
+        '''
+        Сравнивает подписчиков двух каналов
+        '''
+        return self.subscriber_count >= other.subscriber_count
+
+    def __eq__(self, other):
+        '''
+        Сравнивает подписчиков двух каналов
+        '''
+        return self.subscriber_count == other.subscriber_count
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
