@@ -10,6 +10,7 @@ class Channel:
 
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
+        self.dict_hw_2 = {}
         self.__channel_id = channel_id
         channel = Channel.get_service().channels().list(id=channel_id, part='snippet,statistics').execute()
         # новые атрибуты
@@ -19,6 +20,10 @@ class Channel:
         self.subscriberCount = channel['items'][0]['statistics']['subscriberCount']
         self.video_count = channel['items'][0]['statistics']['videoCount']
         self.viewCount = channel['items'][0]['statistics']['viewCount']
+
+    @property
+    def channel_id(self):
+        return self.__channel_id
 
     def __str__(self):
         '''
@@ -30,43 +35,43 @@ class Channel:
         '''
         Складывает подписчиков двух каналов
         '''
-        return self.subscriber_count + other.subscriber_count
+        return self.subscriberCount + other.subscriberCount
 
     def __sub__(self, other):
         '''
         Вычитаем подписчиков двух каналов
         '''
-        return self.subscriber_count - other.subscriber_count
+        return self.subscriberCount - other.subscriberCount
 
     def __lt__(self, other):
         '''
         Сравнивает подписчиков двух каналов
         '''
-        return self.subscriber_count < other.subscriber_count
+        return self.subscriberCount < other.subscriberCount
 
     def __le__(self, other):
         '''
         Сравнивает подписчиков двух каналов
         '''
-        return self.subscriber_count <= other.subscriber_count
+        return self.subscriberCount <= other.subscriberCount
 
     def __gt__(self, other):
         '''
         Сравнивает подписчиков двух каналов
         '''
-        return self.subscriber_count > other.subscriber_count
+        return self.subscriberCount > other.subscriberCount
 
     def __ge__(self, other):
         '''
         Сравнивает подписчиков двух каналов
         '''
-        return self.subscriber_count >= other.subscriber_count
+        return self.subscriberCount >= other.subscriberCount
 
     def __eq__(self, other):
         '''
         Сравнивает подписчиков двух каналов
         '''
-        return self.subscriber_count == other.subscriber_count
+        return self.subscriberCount == other.subscriberCount
 
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
@@ -82,7 +87,8 @@ class Channel:
         return object_get
 
     def to_json(self, file_name):
-        """Мохраняющий в файл значения атрибутов экземпляра `Channel`"""
+        """Cохраняющий в файл значения атрибутов экземпляра `Channel`"""
+        
         self.dict_hw_2['id'] = self.channel_id
         self.dict_hw_2['title'] = self.title
         self.dict_hw_2['description'] = self.description
