@@ -35,13 +35,13 @@ class Channel:
         '''
         Складывает подписчиков двух каналов
         '''
-        return self.subscriberCount + other.subscriberCount
+        return int(self.subscriberCount) + int(other.subscriberCount)
 
     def __sub__(self, other):
         '''
         Вычитаем подписчиков двух каналов
         '''
-        return self.subscriberCount - other.subscriberCount
+        return int(self.subscriberCount) - int(other.subscriberCount)
 
     def __lt__(self, other):
         '''
@@ -82,7 +82,7 @@ class Channel:
     @classmethod
     def get_service(cls):
         """Класс-метод возвращающий объект для работы с YouTube API"""
-        api_key: str = os.getenv('YT_API_KEY')
+        api_key: str = os.getenv('API_KEY')
         object_get = build('youtube', 'v3', developerKey=api_key)
         return object_get
 
