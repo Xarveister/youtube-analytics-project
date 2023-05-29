@@ -88,7 +88,7 @@ class Channel:
 
     def to_json(self, file_name):
         """Cохраняющий в файл значения атрибутов экземпляра `Channel`"""
-        
+
         self.dict_hw_2['id'] = self.channel_id
         self.dict_hw_2['title'] = self.title
         self.dict_hw_2['description'] = self.description
