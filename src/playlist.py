@@ -30,6 +30,16 @@ class PlayList:
         ).execute()
         return data
 
+    def __load_pl_data(self):
+        '''
+        Загружает данные о плейлисте
+        '''
+        data = PlayList.YOUTUBE.playlists().list(
+            part='snippet',
+            id=self._playlist_id,
+        ).execute()
+        return data
+
     def __load_video_data(self):
         '''
         Загружает данные о видеороликах
