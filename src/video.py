@@ -11,12 +11,19 @@ class Video:
 
     def __init__(self, video_id):
         self.video_id = video_id
-        self.duration = self.__get_duration()
         data = self.get_data()
-        self.title = data['items'][0]['snippet']['title']
-        self.url = f'https://www.youtube.com/watch?v={self.video_id}'
-        self.view_count = int(data['items'][0]['statistics']['viewCount'])
-        self.like_count = int(data['items'][0]['statistics']['likeCount'])
+        try:
+            self.title = data['items'][0]['snippet']['title']
+            self.url = f'https://www.youtube.com/watch?v={self.video_id}'
+            self.view_count = int(data['items'][0]['statistics']['viewCount'])
+            self.like_count = int(data['items'][0]['statistics']['likeCount'])
+        except IndexError:
+            self.title = None
+            self.url = None
+            self.view_count = None
+            self.like_count = None
+            self.duration = None
+
 
     def __get_duration(self):
         '''
